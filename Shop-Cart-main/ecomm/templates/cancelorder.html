@@ -1,0 +1,7 @@
+
+<form action="/cancelord/{{order.id}}" method="post">
+    {% csrf_token %}
+<label for="quant">Confirm the number of items you want to cancel</label>
+<input type="number" value="0" min=0 max={{order.qty}} name="quant">
+<button>Submit</button>
+</form>

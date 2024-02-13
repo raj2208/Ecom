@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock title %}
+{% block body %}
+<h1 class="text-center">Checkout</h1>
+
+<div class="container mt-2">
+    
+<div class="row">
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+        <form action="/checkout" method="post">
+          {% csrf_token %}
+          <br/>
+      
+          <label for="name">Full Name</label>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control p-2"
+              id="name"
+              name="name"
+              required
+            />
+          </div>
+          <label for="email">Email</label>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control p-2"
+              id="email"
+              name="email"
+              value="{{user.email}}"
+              required
+            />
+          </div>
+          <label for="address">Shipping Adress</label>
+          <div class="form-group">
+            <textarea
+              type="text"
+              class="form-control p-2"
+              id="address"
+              name="address"
+              required> </textarea>
+          </div>
+
+          <label for="pnumber">Phone Number</label>
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-control p-2"
+              id="pnumber"
+              name="pnumber"
+              required
+            />
+          </div>
+
+          <label for="total">Total</label>
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-control p-2"
+              id="total"
+              name="total"
+              value="{{totalprice}}"
+              disabled
+            />
+          </div>
+          <br />
+
+
+        
+
+          <button>Pay with Razorpay</button>
+      
+         
+          <br />
+          <br />
+          <br />
+        </form>
+
+
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+
+
+</div>
+    
+{% endblock body %}

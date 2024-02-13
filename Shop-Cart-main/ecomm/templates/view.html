@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block cart %}
+{% if request.user.is_authenticated %}
+<li><a class="nav-link scrollto bg-danger p-3 m-2" href="/cart">Cart ({{ cartitems|length|add:"-1" }}) </a></li>
+{% endif %}
+{% endblock cart %}
+
+
+{% block body %}
+{% if v == 1 %}
+
+
+<section id="portfolio" class="portfolio d-flex justify-content-center" >
+<div class="col-md-3 mt-3">
+
+    <img src="/media/{{prod.image}}" class="card-img-top" alt="{{prod.name}}" height="200px" width="150px" />
+    <div class="card-body">
+       <a href="/viewproduct/{{prod.product_id}}"><h5 class="card-title mt-2" id="namepr{{prod.id}}"><b>{{prod.product_name}}</b></h5></a>
+      <p class="card-text">{{prod.desc}}</p>
+      <h6 class="card-title mb-3">
+        Price:<span id="pricepr{{v.id}}">{{prod.product_id}}</span>
+      </h6>
+      <span id="divpr{{v.id}}" class="divpr">
+        <a href="/add/{{prod.product_id}}"><button  class="btn btn-success cart btn-sm mt-0">
+          AddToCart(+) <i class="fa-solid fa-cart-shopping"></i>
+        </button></a>
+      </span>
+
+      <span id="divpr{{v.id}}" class="divpr">
+        <a href="/dele/{{prod.product_id}}"><button  class="btn btn-danger cart btn-sm mt-0">
+          Remove(-) <i class="fa-solid fa-cart-shopping"></i>
+        </button></a>
+      </span>
+
+
+      <a href="/media/{{prod.image}}">
+        <button class="btn btn-dark btn-sm cart"><i class="fa-solid fa-eye"></i></button></a
+      >
+    </div>
+  </div>
+</section>
+{% else %}
+  <h1 class="d-flex justify-content-center">Product Not found</h1>
+{% endif %}
+
+{% endblock body %}

@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+{% block title %}
+  My orders
+{% endblock title %}
+{% block body %}
+{% for message in messages %}
+{% csrf_token %}
+
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"> 
+
+    <strong>{{message}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+  <div class="container">
+    <h1 style="color: blue; text-align: center;">My Orders</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Order Number</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile Number</th>
+          <th>Address</th>
+          <th>Items</th>
+          <th>Price</th>
+          <th>Quantity </th>
+          <th>Status</th>
+          <th>Cancel/Return</th>
+          <th>Txn Id</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td><a href="#" style="color: green;" >{{ order.id }}</a></td>
+            <td>{{order.name}}</td>
+            <td>{{order.email}}</td>
+            <td>{{order.phoneno}}</td>
+            <td>{{order.address}}</td>
+            <td><a href="/viewproduct/{{order.product.product_id}}">{{order.product.product_name}}</td>
+            <td style="font-weight: bold;">{{ order.price }}</td>
+            <td>{{ order.qty }}</td>
+            <td >{{ order.ispaid }}</td>
+            <td> 
+              {% if order.ispaid != "Cancelled-Refund Awaited" %}
+              <a href="/cancelord/{{order.id}}"> <button  class="btn btn-danger cart btn-sm mt-0">
+                Cancel 
+                  </button></a>
+              {% endif %}
+          
+          </td>
+            <td style="font-weight: bold;">{{order.razorpay_pid}}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4" style="text-align: center;">You have no orders.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock body %}
